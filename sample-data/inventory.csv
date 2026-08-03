@@ -1,0 +1,27 @@
+product_name,current_stock,price,reorder_level,category,supplier
+Amul Milk 500ml,12,28,20,Dairy,Amul
+Amul Milk 1L,8,54,15,Dairy,Amul
+Amul Butter 100g,5,55,10,Dairy,Amul
+Amul Paneer 200g,14,85,10,Dairy,Amul
+Coca Cola 250ml,45,20,30,Beverages,Coca Cola India
+Pepsi 600ml,32,30,25,Beverages,PepsiCo India
+Sprite 500ml,28,30,20,Beverages,Coca Cola India
+Lays Classic Salted,8,20,15,Snacks,PepsiCo India
+Uncle Chips Spicy,22,20,15,Snacks,PepsiCo India
+Haldirams Bhujia 200g,17,80,12,Snacks,Haldirams
+Maggi Noodles 70g,30,14,25,Instant Food,Nestle India
+Yippee Noodles 70g,15,15,20,Instant Food,ITC
+Parle-G Biscuit 250g,0,30,20,Biscuits,Parle Products
+Britannia Good Day,25,30,15,Biscuits,Britannia
+Bourbons 100g,19,25,15,Biscuits,Britannia
+Tata Salt 1kg,22,22,10,Grocery,Tata Consumer
+Fortune Refined Oil 1L,11,140,8,Grocery,Adani Wilmar
+Aashirvaad Atta 5kg,7,280,5,Grocery,ITC
+Surf Excel 500g,18,85,10,Household,Hindustan Unilever
+Vim Dish Wash 500ml,14,65,8,Household,Hindustan Unilever
+Dettol Soap 75g,30,35,15,Personal Care,Reckitt
+Dove Soap 75g,20,45,12,Personal Care,Hindustan Unilever
+Clinic Plus Shampoo 80ml,12,65,10,Personal Care,Hindustan Unilever
+Colgate Toothpaste 100g,25,55,12,Personal Care,Colgate-Palmolive
+Red Label Tea 250g,10,115,8,Beverages,Hindustan Unilever
+Bru Coffee 50g,9,95,8,Beverages,Hindustan Unilever
