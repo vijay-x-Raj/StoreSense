@@ -65,7 +65,7 @@ def post_live_segment(
 ):
     """
     Persist a single speech-recognition segment captured by the browser.
-    Called by the frontend Web Speech API listener during a live camera session.
+    Extracts products, creates sale records, and updates inventory in real-time.
     """
     session = db.query(VideoSession).filter(VideoSession.id == session_id).first()
     if not session:
@@ -83,6 +83,53 @@ def post_live_segment(
     db.add(t)
     db.commit()
     db.refresh(t)
+
+    # Real-time Extraction and Sales Recording
+    from app.services.audio_service import extract_products_from_transcript
+    from app.models.models import SaleRecord, InventoryItem
+    from datetime import datetime
+    
+    try:
+        extracted = extract_products_from_transcript(
+            session_id=session_id,
+            segments=[{
+                "text": body.text.strip(),
+                "language": body.language,
+                "confidence": body.confidence,
+            }],
+            db=db
+        )
+        
+        for item in extracted:
+            # Try to find price in inventory
+            inv = db.query(InventoryItem).filter(
+                InventoryItem.product_name.ilike(f"%{item['product_name']}%")
+            ).first()
+            
+            price = inv.price if inv else 20.0  # fallback price
+            quantity = item["quantity"]
+            
+            # Record sale
+            sale = SaleRecord(
+                timestamp=datetime.now(),
+                product_name=item["product_name"],
+                quantity=quantity,
+                price=price,
+                total=quantity * price,
+                customer_id=f"live_{session_id}"
+            )
+            db.add(sale)
+            
+            # Deduct stock
+            if inv:
+                inv.current_stock = max(0, inv.current_stock - quantity)
+                
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        # Log error in production
+        pass
+
     return TranscriptOut.model_validate(t)
 
 
